@@ -22,7 +22,7 @@
     state: present
     definition: "{{ lookup('file', '../conf/k8s/acs-operator.yaml') }}"
   register: acs_operator_success
-  retries: 5
+  retries: 20
   delay: 30
   until: acs_operator_success is not failed
 
@@ -31,6 +31,6 @@
     state: present
     definition: "{{ lookup('file', '../conf/k8s/acs-central.yaml') }}"
   register: central_success
-  retries: 5
+  retries: 20
   delay: 30
   until: central_success is not failed
