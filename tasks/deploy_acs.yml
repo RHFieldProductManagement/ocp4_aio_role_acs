@@ -3,7 +3,7 @@
 
 - name: Copy over k8s-aio env requirements.txt
   ansible.builtin.copy:
-    src: ../conf/k8s/requirements.txt
+    src: requirements.txt
     dest: /tmp/requirements.txt
 
 - name: "Create k8s-aio venv"
@@ -20,7 +20,7 @@
 - name: Apply OpenShift Advanced Cluster Security Operator
   k8s:
     state: present
-    definition: "{{ lookup('file', '../conf/k8s/acs-operator.yaml') }}"
+    definition: "{{ lookup('file', 'acs-operator.yaml') }}"
   register: acs_operator_success
   retries: 20
   delay: 30
@@ -29,7 +29,7 @@
 - name: Apply ACS Central configuration
   k8s:
     state: present
-    definition: "{{ lookup('file', '../conf/k8s/acs-central.yaml') }}"
+    definition: "{{ lookup('file', 'acs-central.yaml') }}"
   register: central_success
   retries: 20
   delay: 30
